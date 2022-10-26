@@ -1,6 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { quiz } from 'reducers/quiz';
+import styled from 'styled-components';
+import swal from 'sweetalert';
+
+const Container = styled.div`
+  background-color: red;
+  width: 100%;
+  max-width: 80rem;
+  margin: 5rem auto;
+`;
 
 export const CurrentQuestion = () => {
   const question = useSelector(
@@ -20,14 +29,28 @@ export const CurrentQuestion = () => {
   const onAnswerSubmit = (questionId, answerIndex) => {
     dispatch(quiz.actions.submitAnswer({ questionId, answerIndex }));
     if (question.correctAnswerIndex === answerIndex) {
+      swal({
+        title: 'Good job!',
+        text: 'You picked the right one!',
+        icon: 'success',
+        button: 'continue'
+      });
+
       dispatch(quiz.actions.goToNextQuestion());
     } else {
-      window.alert('Sorry, wrong answer!!');
+      swal({
+        title: 'Wrong answer!',
+        icon: 'error',
+        button: 'continue'
+      });
+
+      dispatch(quiz.actions.goToNextQuestion());
+      // window.alert('Sorry, wrong answer!!');
     }
   };
 
   return (
-    <div>
+    <Container>
       <h1>Question: {question.questionText}</h1>
       {question.options.map((option, index) => {
         return (
@@ -40,10 +63,9 @@ export const CurrentQuestion = () => {
           </button>
         );
       })}
-
       <p>
         Question {question.id}/{questions}
       </p>
-    </div>
+    </Container>
   );
 };
