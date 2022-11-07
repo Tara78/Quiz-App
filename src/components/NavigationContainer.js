@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { StartPage } from './StartPage';
-import { EndPage } from './EndPage';
 import { CurrentQuestion } from './CurrentQuestion';
+import EndPage from './EndPage';
+import StartPage from './StartPage';
 
-export const Navigation = () => {
-  const showQuiz = useSelector((state) => state.quiz.showQuiz);
+const NavigationContainer = () => {
   const quizOver = useSelector((state) => state.quiz.quizOver);
+  const showQuiz = useSelector((state) => state.quiz.showQuiz);
 
   if (showQuiz) {
     return <CurrentQuestion />;
@@ -16,6 +16,8 @@ export const Navigation = () => {
     return <EndPage />;
   }
 
-  // default page
+  // default return
   return <StartPage />;
 };
+
+export default NavigationContainer;

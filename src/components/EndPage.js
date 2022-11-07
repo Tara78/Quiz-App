@@ -1,26 +1,36 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { quiz } from 'reducers/quiz';
+import { Button } from 'styledComponents/StyledButton';
+import { Wrapper } from 'styledComponents/containers';
 
-export const EndPage = () => {
+
+const EndPage = () => {
   const dispatch = useDispatch();
   const answers = useSelector((store) => store.quiz.answers);
-  const answerCorrect = answers.filter((item) => item.correctAnswerIndex);
+  const correctAnswers = useSelector(
+    (state) =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      state.quiz.answers.filter((answer) => answer.isCorrect === true).length
+  );
 
   return (
-    <div>
-      <p>This is the end page!</p>
-      <h2>
-        You did :{answerCorrect} out of {answers.length}
-      </h2>
-      <button
+    <Wrapper>
+      <h1>Quiz Over</h1>
+      <h3>
+        You did: {correctAnswers} out of {answers.length} Questions!
+      </h3>
+      <Button
         type="button"
         onClick={() => {
           dispatch(quiz.actions.restart());
         }}
       >
-        Restart
-      </button>
-    </div>
+        restart
+      </Button>
+    
+    </Wrapper>
   );
 };
+
+export default EndPage;

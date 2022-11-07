@@ -1,37 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Change these to your own questions! HEEEJ <3 WOOH REDUX!!111
+// Change these to your own questions!
 const questions = [
   {
     id: 1,
     questionText: 'Who set the Olympic record for the 100m dash in 2012?',
-    options: ['Usain Bolt', 'Justin Gatlin', 'Tyson Gay', 'Asafa Powell'],
+    options: ['Usain Bolt', 'Justin Gatlin', 'Tyson Gay'],
     correctAnswerIndex: 0
   },
   {
     id: 2,
     questionText:
       'When was Michael Phelps last named male World Swimmer of the Year?',
-    options: ['2012', '2014', '2016', '2018'],
+    options: ['2012', '2014', '2016'],
     correctAnswerIndex: 2
   },
   {
     id: 3,
     questionText: '3',
-    options: ['Usain Bolt', 'Justin Gatlin', 'Tyson Gay', 'Asafa Powell'],
-    correctAnswerIndex: 0
+    options: ['2012', '2014', '2016'],
+    correctAnswerIndex: 2
   },
   {
     id: 4,
-    questionText: '4?',
-    options: ['2012', '2014', '2016', '2018'],
-    correctAnswerIndex: 2
+    questionText: '4',
+    options: ['2012', '2014', '2016'],
+    correctAnswerIndex: 0
   },
   {
     id: 5,
-    questionText: '5?',
-    options: ['2012', '2014', '2016', '2018'],
-    correctAnswerIndex: 2
+    questionText: '5',
+    options: ['2012', '2014', '2016'],
+    correctAnswerIndex: 1
   }
 ];
 
@@ -91,8 +91,6 @@ export const quiz = createSlice({
      * Use this action to progress the quiz to the next question. If there's
      * no more questions (the user was on the final question), set `quizOver`
      * to `true`.
-     *
-     * This action does not require a payload.
      */
     goToNextQuestion: (state) => {
       if (state.currentQuestionIndex + 1 === state.questions.length) {
@@ -103,13 +101,10 @@ export const quiz = createSlice({
       }
     },
 
-    /**
-     * Use this action to reset the state to the initial state the page had
-     * when it was loaded. Who doesn't like re-doing a quiz when you know the
-     * answers?!
-     *
-     * This action does not require a payload.
-     */
+    /* Use this action to reset the state to the initial state the page had
+      when it was loaded.
+      This action does not require a payload. */
+
     restart: () => {
       return initialState;
     },

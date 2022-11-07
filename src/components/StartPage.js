@@ -1,21 +1,25 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { quiz } from 'reducers/quiz';
+import { Button } from 'styledComponents/StyledButton';
+import { Wrapper } from 'styledComponents/containers';
 
-export const StartPage = () => {
+const StartPage = () => {
   const dispatch = useDispatch();
   return (
-    <div>
+    <Wrapper>
       <h1>Quiz</h1>
 
-      <button
+      <Button
         type="button"
         onClick={() => {
           dispatch(quiz.actions.startQuiz());
         }}
       >
         Start
-      </button>
-    </div>
+      </Button>
+    </Wrapper>
   );
 };
+
+export default StartPage;
